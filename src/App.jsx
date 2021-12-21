@@ -1,11 +1,11 @@
 import GlobalStyle from "./GlobalStyle/style";
-import Router from "./routes";
+import Routes from "./routes";
 
 function App() {
   return (
     <>
     <GlobalStyle />
-      <Router />
+      <Routes />
     </>
   );
 }
