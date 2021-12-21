@@ -1,13 +1,12 @@
-import { Route, Switch } from "react-router-dom";
-
+import { Routes, Route } from "react-router-dom";
 import UserProfile from "../pages/UserProfile";
 import Dashboard from "../pages/Dashboard";
 import Signup from "../pages/Signup";
 import Login from "../pages/Login";
 
-const Routes = () => {
+const Router = () => {
   return (
-    <Switch>
+    <Routes>
       <Route exact path="/">
         <Login />
       </Route>
@@ -20,8 +19,8 @@ const Routes = () => {
       <Route path="/profile">
         <UserProfile />
       </Route>
-    </Switch>
+    </Routes>
   );
 };
 
-export default Routes;
+export default Router;
