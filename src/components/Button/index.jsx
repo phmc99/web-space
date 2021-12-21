@@ -4,7 +4,7 @@ const Button = ({ children, backgroundColor, colorHover, width, margin, onClick,
   return (
     <ButtonStyled
         onClick={onClick}
-        background={backgroundColor}
+        backgroundColor={backgroundColor}
         backgroundHover={colorHover}
         width={width}
         margin={margin}
