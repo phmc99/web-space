@@ -20,6 +20,10 @@ const GlobalStyle = createGlobalStyle`
     --grey-100: #242424;
 }
 
+body {
+    background: var(--offWhite);
+}
+
 body, button {
     font-family: 'Poppins', sans-serif;
 }
