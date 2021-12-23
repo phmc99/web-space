@@ -23,21 +23,22 @@ export const MainContainer = styled.div`
       width: 100%;
       height: 110px;
       display: flex;
-      justify-content: center;
+      justify-content: space-evenly;
       align-items: center;
-      gap: 20px;
       border-bottom: 2px solid var(--grey-0);
 
+
       img {
-        border: 2px solid black;
         border-radius: 50%;
-        width: 70px;
-        height: 70px;
+        width: 110px;
+        height: 80px;
       }
 
-      p {
-        font-size: 20px;
+      h2 {
+        font-size: 22px;
         color: var(--grey-100);
+        font-weight: 400;
+        padding-right: 15px;
       }
     }
   }

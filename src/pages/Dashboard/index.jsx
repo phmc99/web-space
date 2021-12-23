@@ -1,19 +1,34 @@
+import { IoImageOutline } from "react-icons/io5";
+import { MainContainer } from "./styles";
+import { BiWinkSmile } from "react-icons/bi";
+import { useEffect, useState } from "react";
+import { MdAddBox } from "react-icons/md";
+import { useUser } from "../../providers/User";
+
 import Header from "../../components/Header";
 import Post from "../../components/Post";
-import { MainContainer } from "./styles";
-import { IoImageOutline } from "react-icons/io5";
-import { BiWinkSmile } from "react-icons/bi";
-import { MdAddBox } from "react-icons/md";
+import user from "../../assets/img/amigo.png";
+import PostModal from "../../components/PostModal";
 
 const Dashboard = () => {
+  const { userInfo, getUser } = useUser();
+
+  const [toggle, setToggle] =  useState(false)
+
+  useEffect(() => {
+    getUser();
+    // eslint-disable-next-line
+  }, []);
+
   return (
     <>
+    {toggle && <PostModal setToggle={setToggle}/>}
       <Header />
       <MainContainer>
         <aside>
           <div className="userSettings">
-            <img src="#" alt="imagem" />
-            <p>Username</p>
+            <img src={user} alt="imagem" />
+            <h2>{userInfo.username}</h2>
           </div>
         </aside>
         <main>
@@ -32,7 +47,7 @@ const Dashboard = () => {
                 </button>
               </div>
             </div>
-            <button className="buttonAdd">
+            <button className="buttonAdd" onClick={() => setToggle(true)}>
               <MdAddBox size={50} color={"var(--purple-60)"} />
             </button>
           </div>

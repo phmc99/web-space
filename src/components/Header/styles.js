@@ -11,6 +11,7 @@ export const HeaderContainer = styled.header`
   padding: 0 40px;
   position: fixed;
   top: 0;
+  z-index: 1;
 
   .logoContainer {
     display: flex;

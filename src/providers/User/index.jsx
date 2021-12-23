@@ -12,10 +12,15 @@ export const UserProvider = ({ children }) => {
   const [userInfo, setUserInfo] = useState({});
 
   const id = JSON.parse(localStorage.getItem("@webspace:id") || "null");
+  const token = JSON.parse(localStorage.getItem("@webspace:token") || "null");
 
   const getUser = async () => {
-    const resp = await api.get(`auth/user/${id}`);
-    setUserInfo(resp.data.user);
+    const resp = await api.get(`/user/${id}`, {
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
+    })
+    setUserInfo(resp.data);
   };
 
   useEffect(() => {
