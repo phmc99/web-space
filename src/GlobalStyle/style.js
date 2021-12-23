@@ -22,7 +22,25 @@ const GlobalStyle = createGlobalStyle`
 }
 
 body {
-    background: var(--offWhite);
+  background: var(--offWhite);
+
+  ::-webkit-scrollbar {
+      width: 13px;
+      height: 10px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--grey-0);
+      border-radius: 9px;
+      border: 3px solid var(--white);
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--purple-0);
+    }
+    ::-webkit-scrollbar-track {
+      background: none;
+      border-radius: 9px;
+      box-shadow: inset 0px 0px 0px 0px transparent;
+    }
 }
 
 body, button {

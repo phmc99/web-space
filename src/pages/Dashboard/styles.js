@@ -27,7 +27,6 @@ export const MainContainer = styled.div`
       align-items: center;
       border-bottom: 2px solid var(--grey-0);
 
-
       img {
         border-radius: 50%;
         width: 110px;
@@ -85,7 +84,7 @@ export const MainContainer = styled.div`
           outline: none;
           color: var(--grey-0);
           &:hover {
-            filter: brightness(.85);
+            filter: brightness(0.85);
           }
         }
 
@@ -100,6 +99,7 @@ export const MainContainer = styled.div`
             border: none;
             background-color: transparent;
             cursor: pointer;
+
             svg {
               font-size: 1.5rem;
             }
@@ -133,27 +133,19 @@ export const MainContainer = styled.div`
       align-items: flex-end;
       box-shadow: -16px 16px 12px -14px rgba(171, 146, 225, 0.25);
       overflow-x: scroll;
-      ::-webkit-scrollbar {
-        display: none;
-      }
       color: var(--grey-100);
-
-      .friendsCards {
-        width: 110px;
-        height: 90%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        gap: 5px;
-
-        img {
-          border-radius: 50%;
-          width: 70px;
-          height: 70px;
-          border: 2px solid black;
-        }
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--grey-0);
+        border-radius: 9px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--white);
+        border-radius: 9px;
+        box-shadow: inset 0px 0px 0px 0px transparent;
       }
     }
 
@@ -162,7 +154,7 @@ export const MainContainer = styled.div`
       display: flex;
       flex-direction: column;
       margin-top: 20px;
-      height: 270px;
+      height: 250px;
       border-radius: 5px 0 0 5px;
       display: flex;
       align-items: center;
@@ -179,6 +171,31 @@ export const MainContainer = styled.div`
         box-shadow: 0px 5px 3px 2px rgba(171, 146, 225, 0.2);
         font-size: 23px;
         font-weight: 600;
+      }
+
+      .groupsContainer {
+        margin: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex-direction: column;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        width: 95%;
+
+        ::-webkit-scrollbar {
+          width: 6px;
+          height: 6px;
+        }
+        ::-webkit-scrollbar-thumb {
+          background: var(--grey-0);
+          border-radius: 9px;
+        }
+        ::-webkit-scrollbar-track {
+          background: var(--white);
+          border-radius: 9px;
+          box-shadow: inset 0px 0px 0px 0px transparent;
+        }
       }
     }
   }
