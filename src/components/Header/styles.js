@@ -2,26 +2,31 @@ import styled from "styled-components";
 
 export const HeaderContainer = styled.header`
   background-color: var(--offWhite);
-  box-shadow: 1px 8px 15px -8px var(--purple-0);
-  height: 110px;
+  box-shadow: -2px 8px 11px -3px rgba(192, 192, 192, 0.5);
+  height: 100px;
+  width: 96%;
   display: flex;
   align-items: center;
-  justify-content: space-around;
-
-  h1 {
-    font-size: 40px;
-    color: var(--purple-100);
-  }
-
-  .logoContainer img {
-    width: 105px;
-    height: 90px;
-  }
+  justify-content: space-between;
+  padding: 0 40px;
+  position: fixed;
+  top: 0;
 
   .logoContainer {
     display: flex;
     align-items: center;
     flex-direction: row-reverse;
+
+    h1 {
+      font-size: 35px;
+      color: var(--purple-100);
+      margin-left: 10px;
+    }
+
+    img {
+      width: 93px;
+      height: 83px;
+    }
   }
 
   .mainContainer {
@@ -31,11 +36,16 @@ export const HeaderContainer = styled.header`
 
   input {
     border: none;
-    width: 500px;
+    width: 450px;
     height: 50px;
     margin: 0 20px;
     border-radius: 10px;
-    box-shadow: 5px 6px 5px -7px var(--purple-0);
+    box-shadow: -6px 6px 10px -7px var(--grey-0);
+    outline: none;
+    padding-left: 55px;
+    font-size: 20px;
+    color: var(--grey-50);
+    font-family: "Poppins", sans-serif;
   }
 
   button {
