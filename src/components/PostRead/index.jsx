@@ -7,12 +7,12 @@ import {
 import { HiArrowSmUp, HiArrowSmDown } from "react-icons/hi";
 import { AiOutlineClose } from "react-icons/ai";
 
-const PostRead = ({ post, setModal }) => {
+const PostRead = ({ setOpenPost }) => {
   return (
     <PostReadBackground>
       <PostReadContainer>
         <PostReadContent photoUrl={"https://picsum.photos/600/300?grayscale"}>
-          <div className="close-button" onClick={() => setModal(false)}>
+          <div className="close-button" onClick={() => setOpenPost(false)}>
             <AiOutlineClose />
           </div>
           <div className="image">

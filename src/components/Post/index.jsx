@@ -3,7 +3,8 @@ import { HiArrowSmUp, HiArrowSmDown } from "react-icons/hi";
 import { BsChatLeftText } from "react-icons/bs";
 import { MdMoreHoriz } from "react-icons/md";
 
-const Post = ({post}) => {
+const Post = ({post, setOpenPost}) => {
+
   return (
     <PostContainer photoUrl={post.photoUrl}>
       <div className="postImg" >
@@ -12,7 +13,7 @@ const Post = ({post}) => {
           <p>
             {post.title}
           </p>
-          <button>Veja mais</button>
+          <button onClick={() => setOpenPost(true)}>Veja mais</button>
         </div>
       </div>
       <div className="postFooter">
