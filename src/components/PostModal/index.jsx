@@ -50,6 +50,7 @@ const PostModal = ({ setToggle }) => {
             value={title}
             onChange={(evt) => setTitle(evt.target.value)}
             name={"title"}
+            maxLength={80}
           />
           <textarea
             placeholder="Escreva aqui..."

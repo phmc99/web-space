@@ -4,7 +4,7 @@ export const HeaderContainer = styled.header`
   background-color: var(--offWhite);
   box-shadow: -2px 8px 11px -3px rgba(192, 192, 192, 0.5);
   height: 100px;
-  width: 96%;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;

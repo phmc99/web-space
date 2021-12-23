@@ -9,20 +9,35 @@ import Header from "../../components/Header";
 import Post from "../../components/Post";
 import user from "../../assets/img/amigo.png";
 import PostModal from "../../components/PostModal";
+import api from "../../services";
 
 const Dashboard = () => {
   const { userInfo, getUser } = useUser();
 
-  const [toggle, setToggle] =  useState(false)
+  const [toggle, setToggle] = useState(false);
+
+  const [posts, setPosts] = useState([]);
+
+  const getPosts = async () => {
+    const token = JSON.parse(localStorage.getItem("@webspace:token") || "null");
+    const response = await api.get("/post", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    console.log(response.data.data)
+    setPosts(response.data.data);
+  };
 
   useEffect(() => {
     getUser();
+    getPosts();
     // eslint-disable-next-line
   }, []);
 
   return (
     <>
-    {toggle && <PostModal setToggle={setToggle}/>}
+      {toggle && <PostModal setToggle={setToggle} />}
       <Header />
       <MainContainer>
         <aside>
@@ -34,16 +49,18 @@ const Dashboard = () => {
         <main>
           <div className="createPost">
             <div className="inputContainer">
-              <input
-                type="text"
-                placeholder='"Em algum lugar, algo incrível está esperando para ser descoberto." Compartilhe!'
-              />
+              <div className="text-button" onClick={() => setToggle(true)}>
+                <span>
+                  "Em algum lugar, algo incrível está esperando para ser
+                  descoberto." Compartilhe!
+                </span>
+              </div>
               <div className="textOptions">
-                <button>
-                  <IoImageOutline size={30} color={"var(--purple-60)"} />
+                <button onClick={() => setToggle(true)}>
+                  <IoImageOutline color={"var(--purple-60)"} />
                 </button>
-                <button>
-                  <BiWinkSmile size={30} color={"var(--purple-60)"} />
+                <button onClick={() => setToggle(true)}>
+                  <BiWinkSmile color={"var(--purple-60)"} />
                 </button>
               </div>
             </div>
@@ -53,8 +70,9 @@ const Dashboard = () => {
           </div>
           <div className="posts">
             <div>
-              <Post />
-              <Post />
+              {posts.map((item, index) => (
+                <Post post={item} key={index} />
+              ))}
             </div>
           </div>
         </main>

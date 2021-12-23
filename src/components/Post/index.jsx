@@ -3,15 +3,14 @@ import { HiArrowSmUp, HiArrowSmDown } from "react-icons/hi";
 import { BsChatLeftText } from "react-icons/bs";
 import { MdMoreHoriz } from "react-icons/md";
 
-const Post = () => {
+const Post = ({post}) => {
   return (
-    <PostContainer>
-      <div className="postImg" imgUrl="">
+    <PostContainer photoUrl={post.photoUrl}>
+      <div className="postImg" >
         <div className="postImgBackground"></div>
         <div className="postImgContent">
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Nesciuntearum saepe eaque.
+            {post.title}
           </p>
           <button>Veja mais</button>
         </div>
@@ -20,15 +19,15 @@ const Post = () => {
         <div className="postInfo">
           <div className="icons">
             <HiArrowSmUp size={40} color={"var(--purple-60)"} />
-            <span>info</span>
+            <span>{post.likes}</span>
           </div>
           <div className="icons">
             <HiArrowSmDown size={40} color={"var(--purple-60)"} />
-            <span>info</span>
+            <span>X</span>
           </div>
           <div className="icons">
             <BsChatLeftText size={30} color={"var(--purple-60)"} />
-            <span className="spanComment">info</span>
+            <span className="spanComment">{post.comments.length}</span>
           </div>
         </div>
         <div className="postSettings">
