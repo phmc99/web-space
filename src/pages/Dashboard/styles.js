@@ -75,15 +75,14 @@ export const MainContainer = styled.div`
         display: flex;
         flex-direction: column;
         align-items: flex-start;
+        padding: 10px 20px;
 
         .text-button {
           width: 110%;
           height: 45px;
-          margin: 15px 10px;
-          font-size: 18px;
+          font-size: 1rem;
           border: none;
           outline: none;
-          padding: 0 20px;
           color: var(--grey-0);
           &:hover {
             filter: brightness(.85);
@@ -91,16 +90,19 @@ export const MainContainer = styled.div`
         }
 
         .textOptions {
-          gap: 80px;
-          margin-left: 20px;
+          margin-top: 20px;
           width: 80%;
           height: 100px;
+          display: flex;
+          gap: 10px;
 
           button {
-            margin: 10px;
             border: none;
             background-color: transparent;
             cursor: pointer;
+            svg {
+              font-size: 1.5rem;
+            }
           }
         }
       }

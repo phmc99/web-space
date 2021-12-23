@@ -8,13 +8,12 @@ export const PostContainer = styled.div`
   border-radius: 8px;
   box-shadow: 0px 3px 8px 1px rgb(0 0 0 / 15%);
   background-color: var(--white);
-  box-sizing: border-box;
 
   .postImg {
     width: 100%;
     height: 80%;
     border-radius: 8px 8px 0 0;
-    background-image: url("https://picsum.photos/id/237/600/300");
+    background-image: ${(props) => `url(${props.photoUrl})`};
     background-repeat: no-repeat;
     background-size: cover;
     position: relative;
@@ -28,18 +27,19 @@ export const PostContainer = styled.div`
     }
 
     .postImgContent {
-      padding: 10px;
       position: absolute;
+      height: 100%;
+      width: 100%;
+      padding: 10px 20px;
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
+      justify-content: center;
       align-items: flex-start;
-      top: 40px;
       left: 0;
+      top: 0;
     }
 
     p {
-      margin-left: 40px;
       width: 90%;
       height: auto;
       color: white;
@@ -48,21 +48,18 @@ export const PostContainer = styled.div`
     }
 
     button {
-      box-sizing: border-box;
-      margin-top: 50px;
       border: none;
       border-radius: 20px;
-      width: 110px;
-      padding: 3px;
       background-color: var(--purple-50);
       color: white;
-      font-size: 18px;
-      margin-left: 10px;
-      cursor: pointer;
+      font-size: 16px;
+      padding: 5px;
+      width: 90px;
     }
 
     button:hover {
-      background-color: var(--purple-60);
+      cursor: pointer;
+      filter: brightness(.85)
     }
   }
 
