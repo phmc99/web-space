@@ -112,6 +112,7 @@ const SignUpModal = ({ setModal }) => {
               placeholder={errors.password ? errors.password?.message : "Senha"}
               register={register("password")}
               error={errors.password}
+              type="password"
             />
             <Input
               placeholder={
@@ -121,6 +122,7 @@ const SignUpModal = ({ setModal }) => {
               }
               register={register("confirmPassword")}
               error={errors.confirmPassword}
+              type="password"
             />
           </DoubleInput>
           <DoubleInput>

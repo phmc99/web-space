@@ -76,7 +76,7 @@ export const MainContainer = styled.div`
         flex-direction: column;
         align-items: flex-start;
 
-        input {
+        .text-button {
           width: 110%;
           height: 45px;
           margin: 15px 10px;
@@ -84,12 +84,10 @@ export const MainContainer = styled.div`
           border: none;
           outline: none;
           padding: 0 20px;
-          color: var(--grey-50);
-        }
-
-        input::placeholder {
           color: var(--grey-0);
-          font-family: "Poppins", sans-serif;
+          &:hover {
+            filter: brightness(.85);
+          }
         }
 
         .textOptions {

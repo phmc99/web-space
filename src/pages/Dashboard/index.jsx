@@ -13,7 +13,7 @@ import PostModal from "../../components/PostModal";
 const Dashboard = () => {
   const { userInfo, getUser } = useUser();
 
-  const [toggle, setToggle] =  useState(false)
+  const [toggle, setToggle] = useState(false);
 
   useEffect(() => {
     getUser();
@@ -22,7 +22,7 @@ const Dashboard = () => {
 
   return (
     <>
-    {toggle && <PostModal setToggle={setToggle}/>}
+      {toggle && <PostModal setToggle={setToggle} />}
       <Header />
       <MainContainer>
         <aside>
@@ -34,15 +34,17 @@ const Dashboard = () => {
         <main>
           <div className="createPost">
             <div className="inputContainer">
-              <input
-                type="text"
-                placeholder='"Em algum lugar, algo incrível está esperando para ser descoberto." Compartilhe!'
-              />
+              <div className="text-button" onClick={() => setToggle(true)}>
+                <span>
+                  "Em algum lugar, algo incrível está esperando para ser
+                  descoberto." Compartilhe!
+                </span>
+              </div>
               <div className="textOptions">
-                <button>
+                <button onClick={() => setToggle(true)}>
                   <IoImageOutline size={30} color={"var(--purple-60)"} />
                 </button>
-                <button>
+                <button onClick={() => setToggle(true)}>
                   <BiWinkSmile size={30} color={"var(--purple-60)"} />
                 </button>
               </div>
