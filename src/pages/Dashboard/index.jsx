@@ -5,12 +5,12 @@ import { useEffect, useState } from "react";
 import { MdAddBox } from "react-icons/md";
 import { useUser } from "../../providers/User";
 
+import PostModal from "../../components/PostModal";
 import Header from "../../components/Header";
 import Post from "../../components/Post";
 import user from "../../assets/img/amigo.png";
-import PostModal from "../../components/PostModal";
 import api from "../../services";
-
+import GroupCard from "../../components/GroupCard";
 const Dashboard = () => {
   const { userInfo, getUser } = useUser();
 
@@ -25,7 +25,7 @@ const Dashboard = () => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(response.data.data)
+    console.log(response.data.data);
     setPosts(response.data.data);
   };
 
@@ -85,9 +85,19 @@ const Dashboard = () => {
           </div>
           <div className="groupsBar">
             <h3>Meus Grupos</h3>
+            <div className="groupsContainer">
+              <GroupCard />
+              <GroupCard />
+              <GroupCard />
+            </div>
           </div>
           <div className="groupsBar">
             <h3>Outros Grupos</h3>
+            <div className="groupsContainer">
+              <GroupCard />
+              <GroupCard />
+              <GroupCard />
+            </div>
           </div>
         </section>
       </MainContainer>
