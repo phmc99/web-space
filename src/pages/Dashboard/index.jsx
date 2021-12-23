@@ -8,6 +8,7 @@ import { useUser } from "../../providers/User";
 import PostModal from "../../components/PostModal";
 import FriendCard from "../../components/FriendCard";
 import GroupCard from "../../components/GroupCard";
+import PostRead from "../../components/PostRead";
 import Header from "../../components/Header";
 import Post from "../../components/Post";
 import user from "../../assets/img/amigo.png";
@@ -17,6 +18,7 @@ const Dashboard = () => {
   const { userInfo, getUser } = useUser();
 
   const [toggle, setToggle] = useState(false);
+  const [openPost, setOpenPost] = useState(false);
 
   const [posts, setPosts] = useState([]);
 
@@ -40,6 +42,7 @@ const Dashboard = () => {
   return (
     <>
       {toggle && <PostModal setToggle={setToggle} />}
+      {openPost && <PostRead setOpenPost={setOpenPost} />}
       <Header />
       <MainContainer>
         <aside>
@@ -73,7 +76,7 @@ const Dashboard = () => {
           <div className="posts">
             <div>
               {posts.map((item, index) => (
-                <Post post={item} key={index} />
+                <Post post={item} key={index} setOpenPost={setOpenPost} />
               ))}
             </div>
           </div>
