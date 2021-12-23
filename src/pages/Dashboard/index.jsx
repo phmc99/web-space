@@ -6,11 +6,13 @@ import { MdAddBox } from "react-icons/md";
 import { useUser } from "../../providers/User";
 
 import PostModal from "../../components/PostModal";
+import FriendCard from "../../components/FriendCard";
+import GroupCard from "../../components/GroupCard";
 import Header from "../../components/Header";
 import Post from "../../components/Post";
 import user from "../../assets/img/amigo.png";
 import api from "../../services";
-import GroupCard from "../../components/GroupCard";
+
 const Dashboard = () => {
   const { userInfo, getUser } = useUser();
 
@@ -78,10 +80,13 @@ const Dashboard = () => {
         </main>
         <section>
           <div className="friendsBar">
-            <div className="friendsCards">
-              <img src="#" alt="amigo" />
-              <p>amigo</p>
-            </div>
+            <FriendCard />
+            <FriendCard />
+            <FriendCard />
+            <FriendCard />
+            <FriendCard />
+            <FriendCard />
+            <FriendCard />
           </div>
           <div className="groupsBar">
             <h3>Meus Grupos</h3>

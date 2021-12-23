@@ -99,6 +99,7 @@ export const MainContainer = styled.div`
             border: none;
             background-color: transparent;
             cursor: pointer;
+
             svg {
               font-size: 1.5rem;
             }
@@ -132,27 +133,19 @@ export const MainContainer = styled.div`
       align-items: flex-end;
       box-shadow: -16px 16px 12px -14px rgba(171, 146, 225, 0.25);
       overflow-x: scroll;
-      ::-webkit-scrollbar {
-        display: none;
-      }
       color: var(--grey-100);
-
-      .friendsCards {
-        width: 110px;
-        height: 90%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        gap: 5px;
-
-        img {
-          border-radius: 50%;
-          width: 70px;
-          height: 70px;
-          border: 2px solid black;
-        }
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--grey-0);
+        border-radius: 9px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--white);
+        border-radius: 9px;
+        box-shadow: inset 0px 0px 0px 0px transparent;
       }
     }
 
@@ -197,9 +190,6 @@ export const MainContainer = styled.div`
         ::-webkit-scrollbar-thumb {
           background: var(--grey-0);
           border-radius: 9px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-          background: var(--purple-50);
         }
         ::-webkit-scrollbar-track {
           background: var(--white);
