@@ -1,11 +1,12 @@
-import {UserProvider} from "./User/"
+import { UserProvider } from "./User/";
+import { PostProvider } from "./Post/";
 
-const Providers = ({children}) => {
+const Providers = ({ children }) => {
   return (
     <UserProvider>
-      {children}
+      <PostProvider>{children}</PostProvider>
     </UserProvider>
   );
-}
+};
 
-export default Providers
+export default Providers;

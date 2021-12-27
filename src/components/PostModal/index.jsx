@@ -7,30 +7,45 @@ import Button from "../Button";
 import api from "../../services";
 
 const PostModal = ({ setToggle }) => {
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [photoUrl, setPhotoUrl] = useState("");
+  const [file, setFile] = useState("");
+
+  const handleFile = (evt) => {
+    setFile(evt.target.files[0])
+  }
 
   const { userInfo } = useUser();
 
   const initialFormData = {
     title: title,
     description: description,
-    photoUrl: photoUrl,
+    file: file,
+    user: userInfo._id,
   };
-
-  const [formData, setFormData] = useState(initialFormData);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setFormData({ ...initialFormData, user: userInfo._id });
+
+    const form = new FormData();
+    
+    for (let key in initialFormData) {
+      form.append(key, initialFormData[key]);
+    }
+
     const token = JSON.parse(localStorage.getItem("@webspace:token") || "null");
-    await api.post("/post/", formData, {
+    console.log(form);
+
+    await api.post("/post/", form, {
       headers: {
         Authorization: `Bearer ${token}`,
+        "Content-Type": "multipart/form-data",
       },
-    });
-    setToggle(false);
+    }).then(
+      res => console.log(res)
+      );
+      setToggle(false);
   };
 
   return (
@@ -62,12 +77,13 @@ const PostModal = ({ setToggle }) => {
             name={"description"}
           />
           <div className="postFooter">
+            <label for="selectFile">Escolher uma capa</label>
             <input
-              placeholder="Adicione a url de uma imagem..."
-              type="text"
-              value={photoUrl}
-              onChange={(evt) => setPhotoUrl(evt.target.value)}
-              name={"photoUrl"}
+              id="selectFile"
+              type="file"
+              accept="image/png, image/jpeg"
+              onChange={handleFile}
+              name="file"
             />
             <Button type={"action"}>Postar</Button>
           </div>

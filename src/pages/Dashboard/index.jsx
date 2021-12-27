@@ -4,6 +4,7 @@ import { BiWinkSmile } from "react-icons/bi";
 import { useEffect, useState } from "react";
 import { MdAddBox } from "react-icons/md";
 import { useUser } from "../../providers/User";
+import { usePost } from "../../providers/Post";
 
 import PostModal from "../../components/PostModal";
 import FriendCard from "../../components/FriendCard";
@@ -16,6 +17,7 @@ import api from "../../services";
 
 const Dashboard = () => {
   const { userInfo, getUser } = useUser();
+  const { postInfo } = usePost();
 
   const [toggle, setToggle] = useState(false);
   const [openPost, setOpenPost] = useState(false);
@@ -29,7 +31,6 @@ const Dashboard = () => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(response.data.data);
     setPosts(response.data.data);
   };
 
@@ -39,10 +40,16 @@ const Dashboard = () => {
     // eslint-disable-next-line
   }, []);
 
+  useEffect(() => {
+    getPosts();
+    // eslint-disable-next-line
+  }, [openPost]);
+
+
   return (
     <>
       {toggle && <PostModal setToggle={setToggle} />}
-      {openPost && <PostRead setOpenPost={setOpenPost} />}
+      {openPost && <PostRead post={postInfo} setOpenPost={setOpenPost} />}
       <Header />
       <MainContainer>
         <aside>
@@ -76,7 +83,7 @@ const Dashboard = () => {
           <div className="posts">
             <div>
               {posts.map((item, index) => (
-                <Post post={item} key={index} setOpenPost={setOpenPost} />
+                <Post post={item} key={index} setOpenPost={setOpenPost} openPost={openPost}/>
               ))}
             </div>
           </div>

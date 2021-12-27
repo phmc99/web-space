@@ -3,31 +3,37 @@ import { HiArrowSmUp, HiArrowSmDown } from "react-icons/hi";
 import { BsChatLeftText } from "react-icons/bs";
 import { MdMoreHoriz } from "react-icons/md";
 
-const Post = ({post, setOpenPost}) => {
+import { usePost } from "../../providers/Post";
+
+const Post = ({ post, setOpenPost }) => {
+  const { getPost } = usePost();
+
+  const handleClick = async () => {
+    await getPost(post._id);
+    setOpenPost(true);
+  };
 
   return (
-    <PostContainer photoUrl={post.photoUrl}>
-      <div className="postImg" >
+    <PostContainer photoUrl={post.photo.url}>
+      <div className="postImg">
         <div className="postImgBackground"></div>
         <div className="postImgContent">
-          <p>
-            {post.title}
-          </p>
-          <button onClick={() => setOpenPost(true)}>Veja mais</button>
+          <p>{post.title}</p>
+          <button onClick={handleClick}>Veja mais</button>
         </div>
       </div>
       <div className="postFooter">
         <div className="postInfo">
           <div className="icons">
-            <HiArrowSmUp size={40} color={"var(--purple-60)"} />
-            <span>{post.likes}</span>
+            <HiArrowSmUp size={35} color={"var(--purple-60)"} />
+            <span>{post.likes.length}</span>
           </div>
           <div className="icons">
-            <HiArrowSmDown size={40} color={"var(--purple-60)"} />
-            <span>X</span>
+            <HiArrowSmDown size={35} color={"var(--purple-60)"} />
+            <span>{post.dislikes.length}</span>
           </div>
           <div className="icons">
-            <BsChatLeftText size={30} color={"var(--purple-60)"} />
+            <BsChatLeftText size={25} color={"var(--purple-60)"} />
             <span className="spanComment">{post.comments.length}</span>
           </div>
         </div>
