@@ -7,11 +7,87 @@ import {
 import { HiArrowSmUp, HiArrowSmDown } from "react-icons/hi";
 import { AiOutlineClose } from "react-icons/ai";
 
-const PostRead = ({ setOpenPost }) => {
+import { useEffect, useState } from "react";
+import api from "../../services";
+import imgPhoto from "../../assets/img/amigo.png";
+import { usePost } from "../../providers/Post";
+
+const PostRead = ({ setOpenPost, post }) => {
+  const token = JSON.parse(localStorage.getItem("@webspace:token") || "null");
+
+  const [userInfo, setUserInfo] = useState({});
+  const [updatePost, setUpdatePost] = useState(false);
+  const { postInfo, setPostInfo} = usePost()
+
+  useEffect(() => {
+    api
+      .get(`user/${postInfo.user}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        setUserInfo(res.data);
+      });
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [postInfo]);
+
+  useEffect(() => {
+    api
+      .get(`post/${postInfo._id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        setPostInfo(res.data);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [updatePost]);
+
+  const updateLike = async () => {
+    await api.patch(
+      `/post/${postInfo._id}/likes`,
+      { userId: userInfo._id },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    if (postInfo.likes.includes(userInfo._id)) {
+      const filterLikes = post.likes.filter((item) => item !== userInfo._id);
+      postInfo.likes = filterLikes;
+    } else {
+      postInfo.likes = [...postInfo.likes, userInfo._id];
+    }
+    setUpdatePost(postInfo);
+  };
+
+  const updateDislike = async () => {
+    await api.patch(
+      `/post/${postInfo._id}/dislikes`,
+      { userId: userInfo._id },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    if (postInfo.dislikes.includes(userInfo._id)) {
+      const filterDislikes = post.dislikes.filter((item) => item !== userInfo._id);
+      postInfo.dislikes = filterDislikes;
+    } else {
+      postInfo.dislikes = [...postInfo.dislikes, userInfo._id];
+    }
+    setUpdatePost(postInfo);
+  };
+
   return (
     <PostReadBackground>
       <PostReadContainer>
-        <PostReadContent photoUrl={"https://picsum.photos/600/300?grayscale"}>
+        <PostReadContent photoUrl={postInfo.photo ? postInfo.photo.url : ""}>
           <div className="close-button" onClick={() => setOpenPost(false)}>
             <AiOutlineClose />
           </div>
@@ -20,82 +96,46 @@ const PostRead = ({ setOpenPost }) => {
           </div>
           <div className="read">
             <UserDetails>
-              <img src="https://github.com/phmc99.png" alt="userphoto" />
+              <img
+                src={userInfo.photo ? userInfo.photo.url : imgPhoto}
+                alt="userphoto"
+              />
               <span>
-                Pedro Costa <span>(phz)</span>
+                {userInfo.name} <span>({userInfo.username})</span>
               </span>
             </UserDetails>
-            <h1>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. asdasda
-            </h1>
+            <h1>{postInfo.title}</h1>
             <div className="text-limit">
-              <p>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Veritatis sed rem beatae! Illum eos molestiae porro tempora?
-                Accusantium animi odit dignissimos dolore, vel neque expedita,
-                veritatis ad dicta placeat sint? Placeat aliquam non dolor,
-                culpa dolore, fugiat atque voluptatum, eveniet facilis iure
-                nobis. Nulla aperiam corrupti suscipit consectetur expedita
-                excepturi asperiores cum. Neque itaque repudiandae, et
-                dignissimos maxime veritatis rem? Natus veritatis libero
-                quibusdam soluta dolore cumque aliquid tempora vel
-                necessitatibus non, dolorum temporibus deserunt praesentium
-                laborum adipisci? Fugit ipsum velit libero qui soluta vero in
-                enim itaque mollitia natus. Ratione consectetur odit illo
-                asperiores modi hic, eum harum fuga assumenda recusandae dicta
-                corporis reprehenderit odio incidunt at iure architecto rerum
-                praesentium suscipit. Molestias est cupiditate amet iure rem
-                sequi! Maxime perferendis quo saepe, recusandae nesciunt id
-                facere eum consequatur eaque eveniet voluptatem tempore
-                reiciendis repudiandae at fuga error ut? Exercitationem deserunt
-                numquam nemo excepturi fugit fuga similique tenetur animi! Lorem
-                ipsum dolor sit amet consectetur, adipisicing elit. Eaque nulla
-                obcaecati earum quibusdam sed. Molestias similique sapiente
-                molestiae id dignissimos libero aliquam accusantium, magni nihil
-                non officiis? Doloremque, quibusdam eos? Lorem ipsum, dolor sit
-                amet consectetur adipisicing elit. Veritatis sed rem beatae!
-                Illum eos molestiae porro tempora? Accusantium animi odit
-                dignissimos dolore, vel neque expedita, veritatis ad dicta
-                placeat sint? Placeat aliquam non dolor, culpa dolore, fugiat
-                atque voluptatum, eveniet facilis iure nobis. Nulla aperiam
-                corrupti suscipit consectetur expedita excepturi asperiores cum.
-                Neque itaque repudiandae, et dignissimos maxime veritatis rem?
-                Natus veritatis libero quibusdam soluta dolore cumque aliquid
-                tempora vel necessitatibus non, dolorum temporibus deserunt
-                praesentium laborum adipisci? Fugit ipsum velit libero qui
-                soluta vero in enim itaque mollitia natus. Ratione consectetur
-                odit illo asperiores modi hic, eum harum fuga assumenda
-                recusandae dicta corporis reprehenderit odio incidunt at iure
-                architecto rerum praesentium suscipit. Molestias est cupiditate
-                amet iure rem sequi! Maxime perferendis quo saepe, recusandae
-                nesciunt id facere eum consequatur eaque eveniet voluptatem
-                tempore reiciendis repudiandae at fuga error ut? Exercitationem
-                deserunt numquam nemo excepturi fugit fuga similique tenetur
-                animi! Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                Eaque nulla obcaecati earum quibusdam sed. Molestias similique
-                sapiente molestiae id dignissimos libero aliquam accusantium,
-                magni nihil non officiis? Doloremque, quibusdam eos?
-              </p>
+              <p>{postInfo.description}</p>
               <div className="post-date">
-                <span>Data: 17/11/1999</span>
+                <span>Data: {postInfo.createdAt}</span>
               </div>
               <hr />
               <div className="buttons">
-                <div className="icons">
+                <div className="icons" onClick={updateLike}>
                   <HiArrowSmUp size={30} />
                   <span>
-                    Upvote <span className="count">(10)</span>
+                    Upvote
+                    <span className="count">
+                      ({postInfo.likes ? postInfo.likes.length : 0})
+                    </span>
                   </span>
                 </div>
-                <div className="icons">
+                <div className="icons" onClick={updateDislike}>
                   <HiArrowSmDown size={30} />
                   <span>
-                    Downvote <span className="count">(10)</span>
+                    Downvote
+                    <span className="count">
+                      ({postInfo.dislikes ? postInfo.dislikes.length : 0})
+                    </span>
                   </span>
                 </div>
               </div>
               <div className="comments-title">
-                <h2>Comentários:</h2> <span>(64)</span>
+                <h2>Comentários:</h2>{" "}
+                <span>
+                  ({postInfo.comments ? postInfo.comments.length : 0})
+                </span>
               </div>
               <form action="">
                 <textarea
