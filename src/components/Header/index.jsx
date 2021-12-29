@@ -1,16 +1,18 @@
-import { HeaderContainer } from "./styles";
 import logo from "../../assets/img/webSpace-logo.png";
 
-import { FiLogOut } from "react-icons/fi";
-import { AiOutlineSearch } from "react-icons/ai";
-import { IoMdPaperPlane } from "react-icons/io";
 import { IoNotificationsOutline } from "react-icons/io5";
-
+import { AiOutlineSearch } from "react-icons/ai";
+import { HeaderContainer } from "./styles";
+import { IoMdPaperPlane } from "react-icons/io";
+import { useNavigate } from "react-router-dom";
+import { FiLogOut } from "react-icons/fi";
 
 const Header = () => {
+  const navigate = useNavigate();
+
   return (
     <HeaderContainer>
-      <div className="logoContainer">
+      <div className="logoContainer" onClick={() => navigate("/dashboard")}>
         <h1>WebSpace</h1>
         <img src={logo} alt="logo" />
       </div>
@@ -21,7 +23,7 @@ const Header = () => {
           </div>
           <input type="text" />
         </div>
-       
+
         <button>
           <IoNotificationsOutline size={40} color={"var(--purple-50)"} />
         </button>

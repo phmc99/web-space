@@ -1,14 +1,15 @@
+import { useEffect, useState } from "react";
 import { IoImageOutline } from "react-icons/io5";
 import { MainContainer } from "./styles";
 import { BiWinkSmile } from "react-icons/bi";
-import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom"
 import { MdAddBox } from "react-icons/md";
 import { useUser } from "../../providers/User";
 import { usePost } from "../../providers/Post";
 
-import PostModal from "../../components/PostModal";
 import FriendCard from "../../components/FriendCard";
 import GroupCard from "../../components/GroupCard";
+import PostModal from "../../components/PostModal";
 import PostRead from "../../components/PostRead";
 import Header from "../../components/Header";
 import Post from "../../components/Post";
@@ -19,9 +20,10 @@ const Dashboard = () => {
   const { userInfo, getUser } = useUser();
   const { postInfo } = usePost();
 
+  const navigate = useNavigate()
+
   const [toggle, setToggle] = useState(false);
   const [openPost, setOpenPost] = useState(false);
-
   const [posts, setPosts] = useState([]);
 
   const getPosts = async () => {
@@ -53,7 +55,7 @@ const Dashboard = () => {
       <Header />
       <MainContainer>
         <aside>
-          <div className="userSettings">
+          <div className="userSettings" onClick={() => navigate("/profile")}>
             <img src={user} alt="imagem" />
             <h2>{userInfo.username}</h2>
           </div>

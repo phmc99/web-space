@@ -5,18 +5,17 @@ export const ProfileContainer = styled.div`
   height: 100vh;
   margin: 135px auto;
   background-color: var(--offwhite);
-  border: 2px solid black;
   border-radius: 10px;
 
   .profileCard {
-    width: 60%;
-    height: 280px;
+    width: 100%;
+    height: 300px;
+    margin-bottom: 30px;
     display: flex;
     flex-direction: column;
     background-color: var(--white);
     border-radius: 10px 10px 0 0;
     border-bottom: 2px solid var(--grey-0);
-    position: fixed;
 
     .background {
       height: 195px;
@@ -94,6 +93,22 @@ export const ProfileContainer = styled.div`
           }
         }
       }
+    }
+  }
+
+  .profileMainContainer {
+    display: flex;
+    gap: 20px;
+
+    aside {
+      border: 2px solid black;
+      width: 20%;
+      height: 500px;
+      background-color: var(--white);
+    }
+
+    .posts {
+      width: 80%;
     }
   }
 `;

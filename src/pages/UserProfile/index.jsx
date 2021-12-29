@@ -1,9 +1,44 @@
-import Header from "../../components/Header";
+import { useState, useEffect } from "react";
 import { ProfileContainer } from "./styles";
+import { usePost } from "../../providers/Post";
+
+import Header from "../../components/Header";
+import Post from "../../components/Post";
+import PostRead from "../../components/PostRead";
+import api from "../../services";
 
 const UserProfile = () => {
+  const [openPost, setOpenPost] = useState(false);
+  const [posts, setPosts] = useState([]);
+
+  const { postInfo } = usePost();
+
+  const userId = JSON.parse(localStorage.getItem("@webspace:id") || "null");
+
+  const getPosts = async () => {
+    const token = JSON.parse(localStorage.getItem("@webspace:token") || "null");
+
+    const response = await api.get("/post", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    setPosts(response.data.data);
+    console.log(postInfo)
+  };
+
+  useEffect(() => {
+    getPosts();
+    // eslint-disable-next-line
+  }, [openPost]);
+
+  const postUser = posts.filter((item) => item.user === userId);
+  //funciona apenas para o perfil do usuario logado
+
   return (
     <>
+      {openPost && <PostRead post={postInfo} setOpenPost={setOpenPost} />}
       <Header />
       <ProfileContainer>
         <div className="profileCard">
@@ -30,11 +65,22 @@ const UserProfile = () => {
                   magni tenetur neque placeat iure officia temporibus dolores
                   libero?
                 </div>
-                <div className="follows">
-                  
-                </div>
+                <div className="follows"></div>
               </div>
             </div>
+          </div>
+        </div>
+        <div className="profileMainContainer">
+          <aside></aside>
+          <div className="posts">
+            {postUser.map((item, index) => (
+              <Post
+                post={item}
+                key={index}
+                setOpenPost={setOpenPost}
+                openPost={openPost}
+              />
+            ))}
           </div>
         </div>
       </ProfileContainer>
