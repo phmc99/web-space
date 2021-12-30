@@ -5,9 +5,16 @@ import { FiLogOut } from "react-icons/fi";
 import { AiOutlineSearch } from "react-icons/ai";
 import { IoMdPaperPlane } from "react-icons/io";
 import { IoNotificationsOutline } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 
 
 const Header = () => {
+  const navigate = useNavigate();
+
+  const handleNavigate = (page) => {
+    navigate(`/${page}`)
+  }
+
   return (
     <HeaderContainer>
       <div className="logoContainer">
@@ -25,7 +32,7 @@ const Header = () => {
         <button>
           <IoNotificationsOutline size={40} color={"var(--purple-50)"} />
         </button>
-        <button>
+        <button onClick={() => handleNavigate("messenger")}>
           <IoMdPaperPlane size={43} color={"var(--purple-50)"} />
         </button>
         <button>
