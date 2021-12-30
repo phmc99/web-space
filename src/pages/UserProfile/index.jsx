@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { ProfileContainer } from "./styles";
 import { usePost } from "../../providers/Post";
+import { useUser } from "../../providers/User";
 
 import Header from "../../components/Header";
 import Post from "../../components/Post";
@@ -12,6 +13,7 @@ const UserProfile = () => {
   const [posts, setPosts] = useState([]);
 
   const { postInfo } = usePost();
+  const { userInfo } = useUser();
 
   const userId = JSON.parse(localStorage.getItem("@webspace:id") || "null");
 
@@ -25,7 +27,6 @@ const UserProfile = () => {
     });
 
     setPosts(response.data.data);
-    console.log(postInfo)
   };
 
   useEffect(() => {
@@ -49,8 +50,15 @@ const UserProfile = () => {
             />
             <div className="infoCard">
               <div className="profilePhoto">
-                <h3>Username</h3>
+                <h3>
+                  {userInfo.name} <span>({userInfo.username})</span>
+                </h3>
+
                 <figure>
+                  {/* <img
+                    src={userInfo.photo}
+                    alt="imgProfile"
+                  /> */}
                   <img
                     src="https://picsum.photos/id/237/200/300"
                     alt="imgProfile"
@@ -58,14 +66,19 @@ const UserProfile = () => {
                 </figure>
               </div>
               <div className="profileInfo">
+                {/* <div className="bio">{userInfo.bio}</div> */}
                 <div className="bio">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Repellat cumque eaque illo perspiciatis id consequatur
-                  consequuntur veniam corporis unde reprehenderit? Repellendus
-                  magni tenetur neque placeat iure officia temporibus dolores
-                  libero?
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aut
+                  et ducimus placeat omnis fugit.
                 </div>
-                <div className="follows"></div>
+                <div className="follows">
+                  <p>Seguidores</p>
+                  {/* <span>{userInfo.followers}</span> */}
+                  <span>1452</span>
+                  <p>Seguindo</p>
+                  {/* <span>{userInfo.following}</span> */}
+                  <span>1452</span>
+                </div>
               </div>
             </div>
           </div>

@@ -10,6 +10,15 @@ import { FiLogOut } from "react-icons/fi";
 const Header = () => {
   const navigate = useNavigate();
 
+  const handleNavigate = (page) => {
+    navigate(`/${page}`);
+  };
+
+  const logout = () => {
+    localStorage.clear();
+    navigate("/");
+  };
+
   return (
     <HeaderContainer>
       <div className="logoContainer" onClick={() => navigate("/dashboard")}>
@@ -27,11 +36,11 @@ const Header = () => {
         <button>
           <IoNotificationsOutline size={40} color={"var(--purple-50)"} />
         </button>
-        <button>
+        <button onClick={() => handleNavigate("messenger")}>
           <IoMdPaperPlane size={43} color={"var(--purple-50)"} />
         </button>
         <button>
-          <FiLogOut size={35} color={"var(--purple-50)"} />
+          <FiLogOut size={35} color={"var(--purple-50)"} onClick={logout} />
         </button>
       </div>
     </HeaderContainer>

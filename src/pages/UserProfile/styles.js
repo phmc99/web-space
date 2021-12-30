@@ -62,6 +62,11 @@ export const ProfileContainer = styled.div`
           font-size: 34px;
           position: relative;
           left: 170px;
+
+          span {
+            font-size: 20px;
+            color: var(--purple-0);
+          }
         }
       }
 
