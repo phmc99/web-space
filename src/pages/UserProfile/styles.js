@@ -5,18 +5,20 @@ export const ProfileContainer = styled.div`
   height: 100vh;
   margin: 135px auto;
   background-color: var(--offwhite);
-  border: 2px solid black;
   border-radius: 10px;
 
+  .editPhoto {
+  }
+
   .profileCard {
-    width: 60%;
-    height: 280px;
+    width: 100%;
+    height: 300px;
+    margin-bottom: 30px;
     display: flex;
     flex-direction: column;
     background-color: var(--white);
     border-radius: 10px 10px 0 0;
     border-bottom: 2px solid var(--grey-0);
-    position: fixed;
 
     .background {
       height: 195px;
@@ -63,6 +65,58 @@ export const ProfileContainer = styled.div`
           font-size: 34px;
           position: relative;
           left: 170px;
+
+          span {
+            font-size: 20px;
+            color: var(--purple-0);
+          }
+        }
+
+        .editPhoto {
+          display: none;
+          
+          button{
+            background-color: purple;
+          }
+        }
+
+        figure:hover,
+        img:hover {
+          .editPhoto {
+            position: relative;
+            background-color: var(--white);
+            opacity: 0.8;
+            padding: 36%;
+            border-radius: 50%;
+            align-self: center;
+            text-align: center;
+            width: 120%;
+            margin: 0;
+            font-weight: 600;
+            cursor: pointer;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            input[type="file"] {
+              display: none;
+            }
+
+            label {
+              color: var(--grey-50);
+              width: 90px;
+              height: 50px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+
+              :hover {
+                color: var(--purple-60);
+                cursor: pointer;
+              }
+            }
+          }
         }
       }
 
@@ -94,6 +148,22 @@ export const ProfileContainer = styled.div`
           }
         }
       }
+    }
+  }
+
+  .profileMainContainer {
+    display: flex;
+    gap: 20px;
+
+    aside {
+      border: 2px solid black;
+      width: 20%;
+      height: 500px;
+      background-color: var(--white);
+    }
+
+    .posts {
+      width: 80%;
     }
   }
 `;

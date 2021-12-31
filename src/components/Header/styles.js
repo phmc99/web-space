@@ -17,6 +17,7 @@ export const HeaderContainer = styled.header`
     display: flex;
     align-items: center;
     flex-direction: row-reverse;
+    cursor: pointer;
 
     h1 {
       font-size: 35px;

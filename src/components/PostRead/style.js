@@ -6,6 +6,7 @@ export const PostReadBackground = styled.div`
   background: rgb(77, 77, 77, 0.5);
   position: fixed;
   z-index: 2;
+  top: 0;
 `;
 
 export const PostReadContainer = styled.div`

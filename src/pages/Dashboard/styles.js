@@ -26,6 +26,7 @@ export const MainContainer = styled.div`
       justify-content: space-evenly;
       align-items: center;
       border-bottom: 2px solid var(--grey-0);
+      cursor: pointer;
 
       img {
         border-radius: 50%;
