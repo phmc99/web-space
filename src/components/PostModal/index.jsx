@@ -35,7 +35,6 @@ const PostModal = ({ setToggle }) => {
     }
 
     const token = JSON.parse(localStorage.getItem("@webspace:token") || "null");
-    console.log(form);
 
     await api.post("/post/", form, {
       headers: {

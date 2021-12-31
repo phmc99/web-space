@@ -7,6 +7,9 @@ export const ProfileContainer = styled.div`
   background-color: var(--offwhite);
   border-radius: 10px;
 
+  .editPhoto {
+  }
+
   .profileCard {
     width: 100%;
     height: 300px;
@@ -66,6 +69,53 @@ export const ProfileContainer = styled.div`
           span {
             font-size: 20px;
             color: var(--purple-0);
+          }
+        }
+
+        .editPhoto {
+          display: none;
+          
+          button{
+            background-color: purple;
+          }
+        }
+
+        figure:hover,
+        img:hover {
+          .editPhoto {
+            position: relative;
+            background-color: var(--white);
+            opacity: 0.8;
+            padding: 36%;
+            border-radius: 50%;
+            align-self: center;
+            text-align: center;
+            width: 120%;
+            margin: 0;
+            font-weight: 600;
+            cursor: pointer;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            input[type="file"] {
+              display: none;
+            }
+
+            label {
+              color: var(--grey-50);
+              width: 90px;
+              height: 50px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+
+              :hover {
+                color: var(--purple-60);
+                cursor: pointer;
+              }
+            }
           }
         }
       }

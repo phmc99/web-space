@@ -3,17 +3,24 @@ import { ProfileContainer } from "./styles";
 import { usePost } from "../../providers/Post";
 import { useUser } from "../../providers/User";
 
+import PostRead from "../../components/PostRead";
 import Header from "../../components/Header";
 import Post from "../../components/Post";
-import PostRead from "../../components/PostRead";
 import api from "../../services";
 
 const UserProfile = () => {
   const [openPost, setOpenPost] = useState(false);
   const [posts, setPosts] = useState([]);
+  const [file, setFile] = useState("");
+  const [showBtn, setShowBtn] = useState(false);
 
   const { postInfo } = usePost();
   const { userInfo } = useUser();
+
+  const handleFile = (evt) => {
+    setFile(evt.target.files[0]);
+    setShowBtn(true);
+  };
 
   const userId = JSON.parse(localStorage.getItem("@webspace:id") || "null");
 
@@ -37,6 +44,29 @@ const UserProfile = () => {
   const postUser = posts.filter((item) => item.user === userId);
   //funciona apenas para o perfil do usuario logado
 
+  const handleSubmit = async (e) => {
+    console.log(file)
+    e.preventDefault();
+
+    const form = new FormData();
+    form.append("file", file);
+
+    const token = JSON.parse(localStorage.getItem("@webspace:token") || "null");
+
+    await api
+      .patch(
+        `/user/${userId}/photo`,
+        form,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      )
+      .then((res) => console.log(res));
+  };
+
   return (
     <>
       {openPost && <PostRead post={postInfo} setOpenPost={setOpenPost} />}
@@ -45,7 +75,7 @@ const UserProfile = () => {
         <div className="profileCard">
           <div className="background">
             <img
-              src="https://picsum.photos/seed/picsum/800/120"
+              src={"https://picsum.photos/seed/picsum/800/120"}
               alt="imgBackground"
             />
             <div className="infoCard">
@@ -55,14 +85,21 @@ const UserProfile = () => {
                 </h3>
 
                 <figure>
-                  {/* <img
-                    src={userInfo.photo}
-                    alt="imgProfile"
-                  /> */}
                   <img
-                    src="https://picsum.photos/id/237/200/300"
+                    src={userInfo.photo ? userInfo.photo.url : "https://picsum.photos/id/237/200/300"}
                     alt="imgProfile"
                   />
+                  <form className="editPhoto" onSubmit={handleSubmit}>
+                    <label for="selectFile">Editar foto</label>
+                    <input
+                      id="selectFile"
+                      type="file"
+                      accept="image/png, image/jpeg"
+                      onChange={handleFile}
+                      name="file"
+                    />
+                    {showBtn && <button className="showBtn" type="submit">Enviar</button>}
+                  </form>
                 </figure>
               </div>
               <div className="profileInfo">
