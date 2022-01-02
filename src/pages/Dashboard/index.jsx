@@ -57,7 +57,7 @@ const Dashboard = () => {
   useEffect(() => {
     getUser();
     getPosts();
-    getFollowList();
+    /* getFollowList(); */
     // eslint-disable-next-line
   }, []);
 
