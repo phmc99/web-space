@@ -1,14 +1,18 @@
-import ChatCard from "../../components/ChatCard";
-import ChatMessage from "../../components/ChatMessage";
 import { ChatBox, ChatColumn, FriendColumn, NoChat } from "./style";
 import { MdMoreHoriz } from "react-icons/md";
 import { useEffect, useRef, useState } from "react";
-import api from "../../services/";
 import { useUser } from "../../providers/User";
-import { io } from "socket.io-client";
+import { useNavigate } from "react-router-dom";
+import { io } from "socket.io-client"
+
+import api from "../../services/";
+import ChatCard from "../../components/ChatCard";
+import ChatMessage from "../../components/ChatMessage";
 
 const Messenger = () => {
   const { userInfo } = useUser();
+  const navigate = useNavigate();
+
   const token = JSON.parse(
     localStorage.getItem("@webspace:token") || "null"
   );
@@ -18,6 +22,7 @@ const Messenger = () => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const [arrivalMessage, setArrivalMessage] = useState(null);
+  // eslint-disable-next-line no-unused-vars
   const [onlineUsers, setOnlineUsers] = useState([]);
 
   const socket = useRef();
@@ -40,6 +45,9 @@ const Messenger = () => {
   }, [arrivalMessage, currentChat]);
 
   useEffect(() => {
+    if (!token) {
+      navigate("/")
+    }
     socket.current.emit("addUser", userInfo._id);
     socket.current.on("getUsers", async (users) => {
       const res = await api.get(`/user/follows/${userInfo.followList}`,
@@ -56,12 +64,11 @@ const Messenger = () => {
         })
       );
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token, userInfo]);
 
   useEffect(() => {
     const getConversations = async () => {
-      
-
       try {
         const res = await api.get(`conversation/${userInfo._id}`, {
           headers: {
@@ -78,8 +85,6 @@ const Messenger = () => {
 
   useEffect(() => {
     const getMessages = async () => {
-      
-
       try {
         const res = await api.get(`message/${currentChat?._id}`, {
           headers: {
