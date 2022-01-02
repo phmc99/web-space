@@ -45,7 +45,7 @@ const UserProfile = () => {
   //funciona apenas para o perfil do usuario logado
 
   const handleSubmit = async (e) => {
-    console.log(file)
+    console.log(file);
     e.preventDefault();
 
     const form = new FormData();
@@ -54,16 +54,12 @@ const UserProfile = () => {
     const token = JSON.parse(localStorage.getItem("@webspace:token") || "null");
 
     await api
-      .patch(
-        `/user/${userId}/photo`,
-        form,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      )
+      .patch(`/user/${userId}/photo`, form, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
+      })
       .then((res) => console.log(res));
   };
 
@@ -86,7 +82,11 @@ const UserProfile = () => {
 
                 <figure>
                   <img
-                    src={userInfo.photo ? userInfo.photo.url : "https://picsum.photos/id/237/200/300"}
+                    src={
+                      userInfo.photo
+                        ? userInfo.photo.url
+                        : "https://picsum.photos/id/237/200/300"
+                    }
                     alt="imgProfile"
                   />
                   <form className="editPhoto" onSubmit={handleSubmit}>
@@ -98,7 +98,11 @@ const UserProfile = () => {
                       onChange={handleFile}
                       name="file"
                     />
-                    {showBtn && <button className="showBtn" type="submit">Enviar</button>}
+                    {showBtn && (
+                      <button className="showBtn" type="submit">
+                        Enviar
+                      </button>
+                    )}
                   </form>
                 </figure>
               </div>
@@ -110,11 +114,13 @@ const UserProfile = () => {
                 </div>
                 <div className="follows">
                   <p>Seguidores</p>
-                  {/* <span>{userInfo.followers}</span> */}
-                  <span>1452</span>
+                  <span>
+                    {userInfo.followers > 0 ? userInfo.followers : "0"}
+                  </span>
                   <p>Seguindo</p>
-                  {/* <span>{userInfo.following}</span> */}
-                  <span>1452</span>
+                  <span>
+                    {userInfo.following > 0 ? userInfo.following : "0"}
+                  </span>
                 </div>
               </div>
             </div>
