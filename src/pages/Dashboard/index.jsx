@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { IoImageOutline } from "react-icons/io5";
 import { MainContainer } from "./styles";
 import { BiWinkSmile } from "react-icons/bi";
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 import { MdAddBox } from "react-icons/md";
 import { useUser } from "../../providers/User";
 import { usePost } from "../../providers/Post";
@@ -20,14 +20,18 @@ const Dashboard = () => {
   const { userInfo, getUser } = useUser();
   const { postInfo } = usePost();
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [toggle, setToggle] = useState(false);
   const [openPost, setOpenPost] = useState(false);
   const [posts, setPosts] = useState([]);
 
+  const token = JSON.parse(localStorage.getItem("@webspace:token") || "null");
+
   const getPosts = async () => {
-    const token = JSON.parse(localStorage.getItem("@webspace:token") || "null");
+    if (!token) {
+      navigate("/")
+    }
     const response = await api.get("/post", {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -46,7 +50,6 @@ const Dashboard = () => {
     getPosts();
     // eslint-disable-next-line
   }, [openPost]);
-
 
   return (
     <>
@@ -85,7 +88,12 @@ const Dashboard = () => {
           <div className="posts">
             <div>
               {posts.map((item, index) => (
-                <Post post={item} key={index} setOpenPost={setOpenPost} openPost={openPost}/>
+                <Post
+                  post={item}
+                  key={index}
+                  setOpenPost={setOpenPost}
+                  openPost={openPost}
+                />
               ))}
             </div>
           </div>

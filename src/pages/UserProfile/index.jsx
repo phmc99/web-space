@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { ProfileContainer } from "./styles";
 import { usePost } from "../../providers/Post";
 import { useUser } from "../../providers/User";
+import { useNavigate } from "react-router-dom";
 
 import PostRead from "../../components/PostRead";
 import Header from "../../components/Header";
@@ -14,6 +15,8 @@ const UserProfile = () => {
   const [file, setFile] = useState("");
   const [showBtn, setShowBtn] = useState(false);
 
+  const navigate = useNavigate();
+
   const { postInfo } = usePost();
   const { userInfo } = useUser();
 
@@ -23,9 +26,13 @@ const UserProfile = () => {
   };
 
   const userId = JSON.parse(localStorage.getItem("@webspace:id") || "null");
+  const token = JSON.parse(localStorage.getItem("@webspace:token") || "null");
 
   const getPosts = async () => {
-    const token = JSON.parse(localStorage.getItem("@webspace:token") || "null");
+
+    if (!token) {
+      navigate("/")
+    }
 
     const response = await api.get("/post", {
       headers: {
