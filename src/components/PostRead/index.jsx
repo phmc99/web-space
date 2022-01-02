@@ -21,13 +21,13 @@ const PostRead = ({ setOpenPost, post }) => {
 
   useEffect(() => {
     api
-      .get(`user/${postInfo.user}`, {
+      .get(`user/${postInfo.username}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
       .then((res) => {
-        setUserInfo(res.data);
+        setUserInfo(res.data[0]);
       });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -87,7 +87,7 @@ const PostRead = ({ setOpenPost, post }) => {
   return (
     <PostReadBackground>
       <PostReadContainer>
-        <PostReadContent photoUrl={postInfo.photo ? postInfo.photo.url : ""}>
+        <PostReadContent photoUrl={postInfo.photo ? postInfo.photo.url : "https://picsum.photos/seed/picsum/1920/1080"}>
           <div className="close-button" onClick={() => setOpenPost(false)}>
             <AiOutlineClose />
           </div>

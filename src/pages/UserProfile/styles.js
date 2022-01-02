@@ -60,7 +60,7 @@ export const ProfileContainer = styled.div`
           align-self: center;
         }
 
-        h3 {
+        .name {
           font-weight: 500;
           font-size: 34px;
           position: relative;
@@ -163,7 +163,7 @@ export const ProfileContainer = styled.div`
     }
 
     .posts {
-      width: 80%;
+      width: 100%;
     }
   }
 `;

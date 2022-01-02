@@ -14,7 +14,7 @@ const Post = ({ post, setOpenPost }) => {
   };
 
   return (
-    <PostContainer photoUrl={post.photo.url}>
+    <PostContainer photoUrl={post.photo ? post.photo.url : "https://picsum.photos/seed/picsum/1920/1080"}>
       <div className="postImg">
         <div className="postImgBackground"></div>
         <div className="postImgContent">

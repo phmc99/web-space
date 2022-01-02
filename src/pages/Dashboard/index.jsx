@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { IoImageOutline } from "react-icons/io5";
+import { RiLightbulbFlashLine } from "react-icons/ri";
 import { MainContainer } from "./styles";
 import { BiWinkSmile } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
@@ -25,12 +26,13 @@ const Dashboard = () => {
   const [toggle, setToggle] = useState(false);
   const [openPost, setOpenPost] = useState(false);
   const [posts, setPosts] = useState([]);
+ /*  const [followList, setFollowList] = useState({}); */
 
   const token = JSON.parse(localStorage.getItem("@webspace:token") || "null");
 
   const getPosts = async () => {
     if (!token) {
-      navigate("/")
+      navigate("/");
     }
     const response = await api.get("/post", {
       headers: {
@@ -40,9 +42,22 @@ const Dashboard = () => {
     setPosts(response.data.data);
   };
 
+ /*  const getFollowList = async () => {
+    await api
+      .get(`/user/follows/${user.followList}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        setFollowList(res.data);
+      });
+  }; */
+
   useEffect(() => {
     getUser();
     getPosts();
+    getFollowList();
     // eslint-disable-next-line
   }, []);
 
@@ -58,9 +73,21 @@ const Dashboard = () => {
       <Header />
       <MainContainer>
         <aside>
-          <div className="userSettings" onClick={() => navigate("/profile")}>
-            <img src={user} alt="imagem" />
-            <h2>{userInfo.username}</h2>
+          <div
+            className="userSettings"
+            onClick={() => navigate(`/profile/${userInfo.username}`)}
+          >
+            <div>
+              <img
+                src={userInfo.photo ? userInfo.photo.url : user}
+                alt="imagem"
+              />
+              <h2>{userInfo.username}</h2>
+            </div>
+          </div>
+          <div className="infoSettings">
+            <RiLightbulbFlashLine size={30} color={"var(--purple-50)"} />
+            <p>Salvos</p>
           </div>
         </aside>
         <main>
