@@ -22,7 +22,8 @@ const PostModal = ({ setToggle }) => {
     title: title,
     description: description,
     file: file,
-    user: userInfo._id,
+    userId: userInfo._id,
+    username: userInfo.username,
   };
 
   const handleSubmit = async (e) => {
@@ -33,7 +34,6 @@ const PostModal = ({ setToggle }) => {
     for (let key in initialFormData) {
       form.append(key, initialFormData[key]);
     }
-
     const token = JSON.parse(localStorage.getItem("@webspace:token") || "null");
 
     await api.post("/post/", form, {

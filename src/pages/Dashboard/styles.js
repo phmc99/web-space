@@ -10,36 +10,50 @@ export const MainContainer = styled.div`
   aside {
     background-color: var(--white);
     width: 13%;
-    height: 75%;
+    height: 200px;
     margin-top: 150px;
     border-radius: 5px;
     box-shadow: 0px 3px 8px 1px rgba(0, 0, 0, 0.15);
     position: fixed;
     left: 50px;
-    display: flex;
-    justify-content: center;
 
     .userSettings {
       width: 100%;
-      height: 110px;
+      height: 120px;
       display: flex;
-      justify-content: space-evenly;
+      flex-direction: column;
       align-items: center;
+      justify-content: center;
       border-bottom: 2px solid var(--grey-0);
       cursor: pointer;
 
+      div {
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        gap: 10px;
+      }
+
       img {
         border-radius: 50%;
-        width: 110px;
-        height: 80px;
+        width: 85px;
+        height: 85px;
       }
 
       h2 {
         font-size: 22px;
         color: var(--grey-100);
         font-weight: 400;
-        padding-right: 15px;
       }
+    }
+
+    .infoSettings {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 10px;
+      margin: 20px;
+      font-size: 20px;
     }
   }
 

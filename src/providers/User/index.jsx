@@ -11,16 +11,16 @@ const UserContext = createContext();
 export const UserProvider = ({ children }) => {
   const [userInfo, setUserInfo] = useState({});
 
-  const id = JSON.parse(localStorage.getItem("@webspace:id") || "null");
   const token = JSON.parse(localStorage.getItem("@webspace:token") || "null");
+  const username = JSON.parse(localStorage.getItem("@webspace:username") || "null");
 
   const getUser = async () => {
-    const resp = await api.get(`/user/${id}`, {
+    const resp = await api.get(`/user/${username}`, {
       headers: {
         "Authorization": `Bearer ${token}`
       }
     })
-    setUserInfo(resp.data);
+    setUserInfo(resp.data[0]);
   };
 
   useEffect(() => {
