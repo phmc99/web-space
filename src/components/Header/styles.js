@@ -63,6 +63,7 @@ export const HeaderContainer = styled.header`
       flex-direction: column;
       justify-content: center;
       background-color: var(--white);
+      z-index: 1;
       
       .cardUser {
         display: flex;
@@ -70,6 +71,7 @@ export const HeaderContainer = styled.header`
         align-items: center;
         margin: 10px;
         cursor: pointer;
+        margin-left: 30px;
 
         img {
           width: 50px;

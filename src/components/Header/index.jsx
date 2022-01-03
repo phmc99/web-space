@@ -16,7 +16,7 @@ const Header = () => {
   const token = JSON.parse(localStorage.getItem("@webspace:token") || "null");
 
   const [users, setUsers] = useState([]);
-  const [toggleList, setToggleList] = useState(true);
+  const [toggleList, setToggleList] = useState(false);
   const [usersList, setUsersList] = useState([]);
   const [filteredUser, setFilteredUser] = useState([]);
 
@@ -42,12 +42,17 @@ const Header = () => {
   };
 
   const searchUsers = () => {
-    setUsersList(
-      users.filter((item) => {
-        let search = item.name.toLowerCase();
-        return search.includes(filteredUser.toLowerCase());
-      })
-    );
+    if (filteredUser === "") {
+      setToggleList(false);
+    } else {
+      setUsersList(
+        users.filter((item) => {
+          let search = item.name.toLowerCase();
+          setToggleList(true);
+          return search.includes(filteredUser.toLowerCase());
+        })
+      );
+    }
   };
 
   useEffect(() => {
