@@ -72,41 +72,9 @@ export const ProfileContainer = styled.div`
           }
         }
 
-        .buttons {
-          position: relative;
-          left: 170px;
-          display: flex;
-          gap: 10px;
-
-          button {
-            cursor: pointer;
-            width: 100px;
-            border: 0;
-            border-radius: 5px;
-            padding: 3px;
-            color: var(--offWhite);
-
-            &:hover {
-              filter: brightness(0.85);
-            }
-          }
-
-          .message {
-            background: var(--grey-0);
-            color: var(--grey-50);
-          }
-          .follow {
-            background: var(--purple-50);
-          }
-          .following {
-            background: var(--purple-100);
-          }
-        }
-
         .editPhoto {
           display: none;
 
-<<<<<<< HEAD
           .showBtn {
             background-color: var(--purple-60);
             position: absolute;
@@ -117,10 +85,6 @@ export const ProfileContainer = styled.div`
             color: var(--white);
             border: none;
             cursor: pointer;
-=======
-          button {
-            background-color: purple;
->>>>>>> 24ae899fe6a26db98dad998e7181e1a38a3d2d47
           }
         }
 
@@ -170,9 +134,8 @@ export const ProfileContainer = styled.div`
         align-items: center;
         width: 100%;
         height: 50%;
-        
+
         .bio {
-          margin-top: 20px;
           width: 80%;
           color: var(--grey-50);
         }
