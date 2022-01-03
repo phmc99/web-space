@@ -26,7 +26,7 @@ const Dashboard = () => {
   const [toggle, setToggle] = useState(false);
   const [openPost, setOpenPost] = useState(false);
   const [posts, setPosts] = useState([]);
- /*  const [followList, setFollowList] = useState({}); */
+  const [friendList, setFriendList] = useState([]);
 
   const token = JSON.parse(localStorage.getItem("@webspace:token") || "null");
 
@@ -42,29 +42,34 @@ const Dashboard = () => {
     setPosts(response.data.data);
   };
 
- /*  const getFollowList = async () => {
-    await api
-      .get(`/user/follows/${user.followList}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((res) => {
-        setFollowList(res.data);
-      });
-  }; */
+  const getFollowList = async () => {
+    const response = await api.get(`/user/follows/${userInfo.followList}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    const followers = response.data.followers;
+    const followingUsernames = response.data.following.map((item) =>
+      item.username.toLowerCase()
+    );
+    const newFriendList = followers.filter((item) =>
+      followingUsernames.includes(item.username.toLowerCase())
+    );
+
+    setFriendList(newFriendList);
+  };
 
   useEffect(() => {
     getUser();
-    getPosts();
-    /* getFollowList(); */
     // eslint-disable-next-line
-  }, []);
+  }, [])
 
   useEffect(() => {
+    getFollowList();
     getPosts();
     // eslint-disable-next-line
-  }, [openPost]);
+  }, [userInfo]);
 
   return (
     <>
@@ -127,13 +132,13 @@ const Dashboard = () => {
         </main>
         <section>
           <div className="friendsBar">
-            <FriendCard />
-            <FriendCard />
-            <FriendCard />
-            <FriendCard />
-            <FriendCard />
-            <FriendCard />
-            <FriendCard />
+            {friendList.length > 0 ? (
+              friendList.map((item, key) => (
+                <FriendCard key={key} user={item} onClick={() => navigate(`/profile/${item.username}`)} />
+              ))
+            ) : (
+              <h1>Conecte-se com novos amigos!</h1>
+            )}
           </div>
           <div className="groupsBar">
             <h3>Meus Grupos</h3>

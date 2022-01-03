@@ -8,7 +8,7 @@ const ChatMessage = ({owner, data}) => {
 
   useEffect(() => {
     api
-      .get(`user/${data.senderId}`, {
+      .get(`user/id/${data.senderId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

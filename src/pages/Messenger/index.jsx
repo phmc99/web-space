@@ -1,21 +1,20 @@
 import { ChatBox, ChatColumn, FriendColumn, NoChat } from "./style";
-import { MdMoreHoriz } from "react-icons/md";
 import { useEffect, useRef, useState } from "react";
 import { useUser } from "../../providers/User";
 import { useNavigate } from "react-router-dom";
-import { io } from "socket.io-client"
+import { io } from "socket.io-client";
 
 import api from "../../services/";
 import ChatCard from "../../components/ChatCard";
 import ChatMessage from "../../components/ChatMessage";
+import Header from "../../components/Header";
+import ChatHeader from "../../components/ChatHeader";
 
 const Messenger = () => {
   const { userInfo } = useUser();
   const navigate = useNavigate();
 
-  const token = JSON.parse(
-    localStorage.getItem("@webspace:token") || "null"
-  );
+  const token = JSON.parse(localStorage.getItem("@webspace:token") || "null");
 
   const [conversations, setConversations] = useState([]);
   const [currentChat, setCurrentChat] = useState(null);
@@ -46,25 +45,23 @@ const Messenger = () => {
 
   useEffect(() => {
     if (!token) {
-      navigate("/")
+      navigate("/");
     }
     socket.current.emit("addUser", userInfo._id);
     socket.current.on("getUsers", async (users) => {
-      const res = await api.get(`/user/follows/${userInfo.followList}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const res = await api.get(`/user/follows/${userInfo.followList}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       setOnlineUsers(
         res.data.followers.filter((f) => {
-          return users.some((u) => u.userId === f._id)
+          return users.some((u) => u.userId === f._id);
         })
       );
     });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token, userInfo]);
 
   useEffect(() => {
@@ -132,6 +129,7 @@ const Messenger = () => {
 
   return (
     <>
+      <Header />
       <ChatBox>
         <FriendColumn>
           {conversations.map((item, key) => (
@@ -149,15 +147,14 @@ const Messenger = () => {
         </FriendColumn>
         {currentChat ? (
           <ChatColumn>
-            <header>
-              <div className="user">
-                <img src={"https://github.com/phmc99.png"} alt="user" />
-                <h2>Name (Username)</h2>
-              </div>
-              <button>
-                <MdMoreHoriz size={40} color={"var(--purple-60)"} />
-              </button>
-            </header>
+            <ChatHeader
+              user={
+                conversations[0].members[0] === userInfo._id
+                  ? conversations[0].members[1]
+                  : conversations[0].members[0]
+              }
+            />
+
             <div className="chat-content">
               <div>
                 {messages.map((item, key) => (
