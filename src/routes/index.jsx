@@ -1,4 +1,4 @@
-import { Route, Routes, useParams } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import UserProfile from "../pages/UserProfile";
 import Dashboard from "../pages/Dashboard";
 import Login from "../pages/Login";

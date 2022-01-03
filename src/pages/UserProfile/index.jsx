@@ -18,6 +18,7 @@ const UserProfile = () => {
   const [file, setFile] = useState("");
   const [showBtn, setShowBtn] = useState(false);
   const [followList, setFollowList] = useState({});
+  const [message, setMessage] = useState(false);
 
   const token = JSON.parse(localStorage.getItem("@webspace:token") || "null");
   const navigate = useNavigate();
@@ -79,6 +80,35 @@ const UserProfile = () => {
       .then((res) => console.log(res));
   };
 
+  const getFollowList = async () => {
+    await api
+      .get(`/user/follows/${user.followList}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        setFollowList(res.data);
+        const followers = res.data.followers;
+        const following = res.data.following;
+
+        const isFollower = followers.find((item) => userInfo._id === item._id);
+        const isFollowing = following.find((item) => userInfo._id === item._id);
+
+        if (isFollower && isFollowing) {
+          setMessage(true);
+        } else {
+          setMessage(false)
+        }
+      });
+  };
+
+  const followButton =
+    followList.followers &&
+    followList.followers
+      .map((item) => item.username)
+      .includes(userInfo.username);
+
   const follow = async () => {
     await api
       .patch(
@@ -91,25 +121,33 @@ const UserProfile = () => {
         }
       )
       .then((res) => {
-        toast.success(res.data.msg)
-        setFollowList(...followList, userInfo)
+        toast.success(res.data.msg);
+        getFollowList();
       });
   };
 
-  const getFollowList = async () => {
-    await api
-      .get(`/user/follows/${user.followList}`, {
+  const newConversation = async () => {
+    const response = await api.post(
+      "/conversation",
+      {
+        senderId: userInfo._id,
+        receiverId: user._id,
+      },
+      {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      })
-      .then((res) => {
-        setFollowList(res.data);
-      });
+      }
+    );
+    console.log(response);
+    navigate("/messenger");
   };
 
-  const followButton = followList.followers && followList.followers.map((item) => item.username).includes(userInfo.username)
-  
+  useEffect(() => {
+    getUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   useEffect(() => {
     getUser();
     getPosts();
@@ -119,8 +157,7 @@ const UserProfile = () => {
   useEffect(() => {
     getFollowList();
     // eslint-disable-next-line
-  }, [user, followList]);
-
+  }, [user]);
 
   return (
     <>
@@ -137,8 +174,22 @@ const UserProfile = () => {
               <div className="profilePhoto">
                 <div className="name">
                   {user.name} <span>({user.username})</span>
-                  {userhost !== user.username && (<button onClick={follow}>{followButton ? "Following" : "Follow"}</button>)}
                 </div>
+                {userhost !== user.username && (
+                  <div className="buttons">
+                    <button
+                      className={followButton ? "following" : "follow"}
+                      onClick={follow}
+                    >
+                      {followButton ? "Seguindo" : "Seguir"}
+                    </button>
+                    {message && (
+                      <button className="message" onClick={newConversation}>
+                        Mensagem
+                      </button>
+                    )}
+                  </div>
+                )}
 
                 <figure>
                   <img
@@ -169,9 +220,13 @@ const UserProfile = () => {
                 </div>
                 <div className="follows">
                   <p>Seguidores</p>
-                  <span>{followList.followers ? followList.followers.length : "-"}</span>
+                  <span>
+                    {followList.followers ? followList.followers.length : "-"}
+                  </span>
                   <p>Seguindo</p>
-                  <span>{followList.following ? followList.following.length : "-"}</span>
+                  <span>
+                    {followList.following ? followList.following.length : "-"}
+                  </span>
                 </div>
               </div>
             </div>

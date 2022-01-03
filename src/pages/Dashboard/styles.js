@@ -162,6 +162,11 @@ export const MainContainer = styled.div`
         border-radius: 9px;
         box-shadow: inset 0px 0px 0px 0px transparent;
       }
+
+      h1 {
+        align-self: center;
+        margin: 0 auto;
+      }
     }
 
     .groupsBar {
