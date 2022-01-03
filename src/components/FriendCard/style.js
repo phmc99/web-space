@@ -13,7 +13,11 @@ export const FriendCardContainer = styled.div`
 
   img {
     border-radius: 50%;
-    width: 95px;
-    height: 70px;
+    width: 80px;
+    height: 80px;
+  }
+
+  &:hover {
+    cursor: pointer;
   }
 `;

@@ -1,11 +1,11 @@
 import { FriendCardContainer } from "./style";
 import imgFriend from "../../assets/img/amigo.png"
 
-const FriendCard = () => {
+const FriendCard = ({user, ...rest}) => {
   return (
-    <FriendCardContainer>
-      <img src={imgFriend} alt="amigo" />
-      <p>Amigo</p>
+    <FriendCardContainer {...rest}>
+      <img src={user.photo ? user.photo.url : imgFriend} alt="amigo" />
+      <p>{user.username}</p>
     </FriendCardContainer>
   );
 };

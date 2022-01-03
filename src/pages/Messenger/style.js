@@ -5,7 +5,7 @@ export const ChatBox = styled.div`
   height: 80vh;
   background-color: var(--white);
   position: absolute;
-  top: 50%;
+  top: 55%;
   left: 50%;
   transform: translate(-50%, -50%);
   box-shadow: 0px 5px 10px rgb(37, 37, 37, 0.25);
@@ -23,29 +23,6 @@ export const ChatColumn = styled.div`
   width: 70%;
   display: flex;
   flex-direction: column;
-
-  header {
-    background: var(--white);
-    width: 100%;
-    height: 10%;
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    justify-content: space-between;
-
-    .user {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      img {
-        width: 40px;
-        border-radius: 50%;
-      }
-      h2 {
-        font-weight: 500;
-        font-size: 18px;
-      }
-    }
 
     button {
       border: 0;

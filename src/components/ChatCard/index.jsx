@@ -8,7 +8,7 @@ const ChatCard = ({user}) => {
 
   useEffect(() => {
     api
-      .get(`user/${user}`, {
+      .get(`user/id/${user}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
