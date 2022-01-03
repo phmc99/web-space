@@ -147,6 +147,7 @@ export const MainContainer = styled.div`
       align-items: flex-end;
       box-shadow: -16px 16px 12px -14px rgba(171, 146, 225, 0.25);
       overflow-x: scroll;
+      overflow-y: hidden;
       color: var(--grey-100);
 
       ::-webkit-scrollbar {

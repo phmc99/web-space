@@ -22,13 +22,12 @@ export const MessageContent = styled.div`
 
   .message {
     padding: 10px;
-    background-color: ${(props) => (props.owner ? "blue" : "gray")};
-    color: ${(props) => (props.owner ? "white" : "black")};
-
+    background-color: ${(props) => (props.owner ? "var(--purple-60)" : "var(--grey-0)")};
+    color: ${(props) => (props.owner ? "var(--white)" : "var(--grey-100)")};
     border-radius: 10px; 
 
     p {
-      font-size: 12px;
+      font-size: 16px;
     }
   }
 `;
