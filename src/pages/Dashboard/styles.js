@@ -138,7 +138,6 @@ export const MainContainer = styled.div`
     position: fixed;
     right: 0;
     width: 25%;
-    z-index: 1;
 
     .friendsBar {
       height: 120px;
@@ -149,6 +148,7 @@ export const MainContainer = styled.div`
       box-shadow: -16px 16px 12px -14px rgba(171, 146, 225, 0.25);
       overflow-x: scroll;
       color: var(--grey-100);
+
       ::-webkit-scrollbar {
         width: 6px;
         height: 6px;
