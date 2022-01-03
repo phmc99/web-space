@@ -74,9 +74,17 @@ export const ProfileContainer = styled.div`
 
         .editPhoto {
           display: none;
-          
-          button{
-            background-color: purple;
+
+          .showBtn {
+            background-color: var(--purple-60);
+            position: absolute;
+            left: 20px;
+            height: 40px;
+            width: 70px;
+            border-radius: 5px;
+            color: var(--white);
+            border: none;
+            cursor: pointer;
           }
         }
 
