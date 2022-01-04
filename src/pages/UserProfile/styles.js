@@ -7,9 +7,6 @@ export const ProfileContainer = styled.div`
   background-color: var(--offwhite);
   border-radius: 10px;
 
-  .editPhoto {
-  }
-
   .profileCard {
     width: 100%;
     height: 300px;
@@ -65,6 +62,37 @@ export const ProfileContainer = styled.div`
           font-size: 34px;
           position: relative;
           left: 170px;
+        }
+        
+        .buttons {
+          position: relative;
+          left: 170px;
+          display: flex;
+          gap: 10px;
+
+          button {
+            cursor: pointer;
+            width: 100px;
+            border: 0;
+            border-radius: 5px;
+            padding: 3px;
+            color: var(--offWhite);
+
+            &:hover {
+              filter: brightness(0.85);
+            }
+          }
+
+          .message {
+            background: var(--grey-0);
+            color: var(--grey-50);
+          }
+          .follow {
+            background: var(--purple-50);
+          }
+          .following {
+            background: var(--purple-100);
+          }
 
           span {
             font-size: 20px;
