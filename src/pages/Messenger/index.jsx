@@ -169,7 +169,7 @@ const Messenger = () => {
             <footer>
               <form>
                 <textarea
-                  placeholder="Escreva sua msg"
+                  placeholder="Escreva sua mensagem..."
                   onChange={(e) => setNewMessage(e.target.value)}
                   value={newMessage}
                 />

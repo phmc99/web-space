@@ -8,6 +8,7 @@ export const HeaderContainer = styled.div`
     align-items: center;
     padding: 10px;
     justify-content: space-between;
+    color: var(--grey-50);
 
     .user {
       display: flex;
