@@ -22,7 +22,7 @@ const ChatHeader = ({user}) => {
       });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [user]);
 
   return (
     <HeaderContainer onClick={() => navigate(`/profile/${userData.username}`)}>

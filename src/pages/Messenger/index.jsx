@@ -98,6 +98,7 @@ const Messenger = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const message = {
       senderId: userInfo._id,
       text: newMessage,
@@ -148,11 +149,9 @@ const Messenger = () => {
         {currentChat ? (
           <ChatColumn>
             <ChatHeader
-              user={
-                conversations[0].members[0] === userInfo._id
-                  ? conversations[0].members[1]
-                  : conversations[0].members[0]
-              }
+              user={currentChat.members.find(
+                (member) => member !== userInfo._id
+              )}
             />
 
             <div className="chat-content">
@@ -167,13 +166,16 @@ const Messenger = () => {
               </div>
             </div>
             <footer>
-              <form>
-                <textarea
+              <form onSubmit={handleSubmit}>
+                <input
                   placeholder="Escreva sua mensagem..."
                   onChange={(e) => setNewMessage(e.target.value)}
                   value={newMessage}
+                  onKeyPress={(e) => {
+                    e.key === "Enter" && handleSubmit();
+                  }}
                 />
-                <button onClick={handleSubmit}>enviar</button>
+                <button type="submit">enviar</button>
               </form>
             </footer>
           </ChatColumn>

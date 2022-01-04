@@ -18,7 +18,7 @@ const ChatMessage = ({owner, data}) => {
       });
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [data]);
 
   return (
     <MessageContainer>

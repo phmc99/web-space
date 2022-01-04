@@ -81,32 +81,17 @@ export const ChatColumn = styled.div`
       align-items: center;
       height: 100%;
 
-      textarea,
+      input,
       button {
         height: 100%;
         border: 0;
         font-family: 'Poppins', sans-serif;
       }
 
-      textarea {
-        resize: none;
+      input {
         outline: none;
         width: 80%;
         padding: 20px 10px;
-
-        ::-webkit-scrollbar {
-          width: 10px;
-        }
-
-        ::-webkit-scrollbar-thumb {
-          background: var(--purple-0);
-          border-radius: 9px;
-        }
-
-        ::-webkit-scrollbar-track {
-          background: var(--offwhite);
-          border-radius: 9px;
-        }
       }
 
       button {
@@ -118,6 +103,8 @@ export const ChatColumn = styled.div`
         &:hover {
           filter: brightness(0.85);
           transition: 0.2s all;
+          background-color: var(--purple-0);
+          color: var(--offWhite);
         }
       }
     }
