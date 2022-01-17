@@ -17,6 +17,7 @@
     "react-scripts": "5.0.0",
     "slate": "^0.72.0",
     "slate-react": "^0.72.1",
+    "socket.io-client": "^4.4.0",
     "styled-components": "^5.3.3",
     "web-vitals": "^2.1.0",
     "yup": "^0.32.11"

@@ -17,6 +17,7 @@ export const HeaderContainer = styled.header`
     display: flex;
     align-items: center;
     flex-direction: row-reverse;
+    cursor: pointer;
 
     h1 {
       font-size: 35px;
@@ -35,20 +36,6 @@ export const HeaderContainer = styled.header`
     gap: 25px;
   }
 
-  input {
-    border: none;
-    width: 450px;
-    height: 50px;
-    margin: 0 20px;
-    border-radius: 10px;
-    box-shadow: -6px 6px 10px -7px var(--grey-0);
-    outline: none;
-    padding-left: 55px;
-    font-size: 20px;
-    color: var(--grey-50);
-    font-family: "Poppins", sans-serif;
-  }
-
   button {
     border: none;
     cursor: pointer;
@@ -57,12 +44,64 @@ export const HeaderContainer = styled.header`
 
   .inputContainer {
     display: flex;
+    flex-direction: column;
     align-items: center;
     position: relative;
-  }
 
-  .iconSearch {
-    position: absolute;
-    left: 30px;
+    .iconSearch {
+      position: absolute;
+      left: 30px;
+    }
+
+    .showUsersList {
+      border: 2px solid var(--purple-50);
+      border-radius: 10px;
+      position: fixed;
+      top: 80px;
+      width: 450px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background-color: var(--white);
+      z-index: 1;
+      
+      .cardUser {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        margin: 10px;
+        cursor: pointer;
+        margin-left: 30px;
+
+        img {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+        }
+
+        p {
+          font-size: 18px;
+        }
+
+        span {
+          font-size: 16px;
+          color: var(--purple-0);
+        }
+      }
+    }
+
+    input {
+      border: none;
+      width: 450px;
+      height: 50px;
+      margin: 0 20px;
+      border-radius: 10px;
+      box-shadow: -6px 6px 10px -7px var(--grey-0);
+      outline: none;
+      padding-left: 55px;
+      font-size: 20px;
+      color: var(--grey-50);
+      font-family: "Poppins", sans-serif;
+    }
   }
 `;

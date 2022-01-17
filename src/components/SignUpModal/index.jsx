@@ -65,8 +65,8 @@ const SignUpModal = ({ setModal }) => {
           JSON.stringify(response.data.token)
         );
         localStorage.setItem(
-          "@webspace:id",
-          JSON.stringify(response.data.user._id)
+          "@webspace:username",
+          JSON.stringify(response.data.user.username)
         );
         navigate("/dashboard");
       })

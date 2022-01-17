@@ -51,10 +51,10 @@ export const PostContainer = styled.div`
       font-size: 22px;
       font-family: "Poppins", sans-serif;
       color: var(--grey-100);
-    }
 
-    input::placeholder {
-      font-size: 22px;
+      ::placeholder {
+        font-size: 22px;
+      }
     }
 
     textarea {
@@ -78,15 +78,25 @@ export const PostContainer = styled.div`
       justify-content: space-between;
       align-items: center;
 
-      input {
-        width: 600px;
-        font-size: 16px;
-        padding: 25px;
-        height: 40px;
-        font-weight: 400;
+      input[type="file"] {
+        display: none;
+      }
 
-        ::placeholder {
-          font-size: 16px;
+      label {
+        background-color: var(--purple-50);
+        opacity: 0.5;
+        border-radius: 5px;
+        color: var(--white);
+        cursor: pointer;
+        width: 200px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        :hover {
+          background-color: var(--purple-50);
+          opacity: 1;
         }
       }
     }
