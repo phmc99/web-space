@@ -1,4 +1,3 @@
-https://github.com/phmc99/web-space-api
 <h1 align="center">
   Web Space - Rede Social
 </h1>
@@ -15,3 +14,8 @@ Rede social com diversas features, inclusive um chat em tempo real.
 - [X] Utilização de um serviço da Amazon para armazenar imagens
 - [X] Conexão via socket utilizando socket.io \ feature do chat em tempo real
 
+
+
+## 🌐 API
+
+[Link da API](https://github.com/phmc99/web-space-api)
