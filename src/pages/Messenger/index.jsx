@@ -27,7 +27,7 @@ const Messenger = () => {
   const socket = useRef();
 
   useEffect(() => {
-    socket.current = io("https://web-space-socket.herokuapp.com");
+    socket.current = io("http://localhost:8000");
     socket.current.on("getMessage", (data) => {
       setArrivalMessage({
         senderId: data.senderId,
